@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison - Data Science & Analytics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .content-section {
+            background: white;
+            margin: 40px auto;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            text-align: justify;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .resume-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .resume-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .resume-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .project-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .project-tags {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .contact-info a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            nav a {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" onclick="showSection('about'); return false;">About</a>
+            <a href="#" onclick="showSection('resume'); return false;">Resume</a>
+            <a href="#" onclick="showSection('projects'); return false;">Projects</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Harrison</h1>
+            <p>Data Science | Statistical Modeling | Machine Learning</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- About Section -->
+        <section id="about" class="content-section active">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>
+                    I'm a fourth-year student at the University of Toronto pursuing a dual major in Physics and Statistics, 
+                    complemented by a minor in Computer Science. This unique combination allows me to approach problems with 
+                    both analytical rigor and creative problem-solving, bridging the gap between theoretical understanding 
+                    and practical application.
+                </p>
+                <p>
+                    My academic journey has equipped me with a strong foundation in data analysis, statistical modeling, 
+                    and computational techniques. I'm particularly passionate about applying these skills to solve complex, 
+                    real-world challenges in data science and quantitative research.
+                </p>
+                <h3>Technical Expertise</h3>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h4>Programming Languages</h4>
+                        <p>Python, R</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>Data Analysis</h4>
+                        <p>Time Series Forecasting, Multiple Regression, Statistical Modeling</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>Machine Learning</h4>
+                        <p>Neural Networks, Transformers, Sentiment Analysis</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>Computational Methods</h4>
+                        <p>Numerical Simulations, Financial Modeling, Computational Physics</p>
+                    </div>
+                </div>
+                <h3>Current Focus</h3>
+                <p>
+                    I'm deeply interested in machine learning and its diverse applications across various domains. 
+                    My recent work has involved developing recurrent neural networks for time series price prediction 
+                    and implementing sentiment analysis using Hugging Face transformers. I'm constantly exploring 
+                    new techniques and methodologies to enhance my analytical capabilities.
+                </p>
+                <h3>Professional Approach</h3>
+                <p>
+                    Throughout my academic and professional experiences, I've developed strong collaboration skills, 
+                    working effectively in team environments while maintaining adaptability in fast-paced settings. 
+                    I take pride in my ability to communicate complex technical insights clearly and effectively, 
+                    making data-driven decision-making accessible to diverse audiences.
+                </p>
+                <p>
+                    I'm always eager to learn, innovate, and contribute to meaningful projects that leverage data 
+                    to drive impactful decisions. I'm open to opportunities in data analysis, data science, 
+                    quantitative research, and related fields.
+                </p>
+            </div>
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <p>I'd love to connect and discuss opportunities in data science, analytics, and quantitative research.</p>
+                <p>Feel free to reach out via <a href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> or email.</p>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="content-section">
+            <h2>Resume</h2>
+            <div class="resume-section">
+                <p style="font-size: 1.2em; margin-bottom: 30px; color: #666;">
+                    Download my resume to learn more about my experience, education, and qualifications.
+                </p>
+                <a href="resume.pdf" class="resume-link" target="_blank">Download Resume (PDF)</a>
+                <p style="margin-top: 20px; color: #999; font-size: 0.9em;">
+                    Note: Please ensure your resume.pdf file is placed in the same directory as this HTML file.
+                </p>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="content-section">
+            <h2>Selected Projects & Coursework</h2>
+            <p style="margin-bottom: 30px; color: #666; font-size: 1.1em;">
+                Here are some of my notable projects and coursework that demonstrate my skills in data science, 
+                machine learning, and statistical analysis.
+            </p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h4>Time Series Price Forecasting</h4>
+                    <p>
+                        Developed and implemented recurrent neural networks (RNNs) to predict future price movements 
+                        in financial markets. This project involved preprocessing time series data, designing network 
+                        architectures, and evaluating predictive performance.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">RNN</span>
+                        <span class="tag">Time Series</span>
+                        <span class="tag">Financial Modeling</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4>Sentiment Analysis with Transformers</h4>
+                    <p>
+                        Built a sentiment analysis system using Hugging Face transformers to classify text data. 
+                        Explored various transformer architectures and fine-tuning techniques to achieve optimal 
+                        performance on different datasets.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Transformers</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">Hugging Face</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4>Statistical Modeling & Regression</h4>
+                    <p>
+                        Applied multiple regression techniques to analyze complex datasets, identifying relationships 
+                        between variables and building predictive models. Worked with real-world data to extract 
+                        meaningful insights and validate statistical assumptions.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">R</span>
+                        <span class="tag">Statistics</span>
+                        <span class="tag">Regression</span>
+                        <span class="tag">Data Analysis</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4>Computational Physics Applications</h4>
+                    <p>
+                        Developed numerical simulation methods to solve complex physics problems, implementing 
+                        computational algorithms and analyzing results. Combined theoretical physics knowledge 
+                        with programming skills to model physical systems.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Numerical Methods</span>
+                        <span class="tag">Physics</span>
+                        <span class="tag">Simulations</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4>Financial Data Analysis</h4>
+                    <p>
+                        Conducted comprehensive analysis of financial datasets, applying statistical techniques 
+                        and time series methods to identify patterns and trends. Created visualizations and 
+                        reports to communicate findings effectively.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">R</span>
+                        <span class="tag">Finance</span>
+                        <span class="tag">Data Visualization</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4>Machine Learning Applications</h4>
+                    <p>
+                        Explored various machine learning algorithms and their applications across different domains. 
+                        Implemented models for classification, regression, and clustering tasks, comparing performance 
+                        and optimizing hyperparameters.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Scikit-learn</span>
+                        <span class="tag">Data Science</span>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 30px; color: #666; font-style: italic;">
+                For more detailed project descriptions and code samples, please feel free to reach out!
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Harrison. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active nav link
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Handle initial page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set first nav link as active
+            const firstNavLink = document.querySelector('nav a');
+            if (firstNavLink) {
+                firstNavLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
+
